@@ -1,0 +1,32 @@
+$user=$_POST["user"];
+$pass=$_POST["Password"];
+
+$conn = new mysqli('localhost','root','','pharmacy') 
+
+   
+    if($sql= $conn->query("SELECT * from admin where user= '$user'"))
+    {
+       echo $user,"  ",$pass."<br>" ;
+    }
+else
+{
+    echo "Error: " .$conn->error;
+}
+echo $sql->num_rows;
+while($row= $sql->fetch_assoc())
+{   $s1=$row["user"];
+    $s2=$row["Password"];
+}
+
+if($pass == $s1)
+{ echo "hello";
+
+    echo $s2;
+   $conn-> query("select a.user,a.password from admin a where a.user='$s1' and a.password='$s2'");
+    header("location:adminmenu.html");
+}
+else
+{
+     echo "error";
+}
+?>
